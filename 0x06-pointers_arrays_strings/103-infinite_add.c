@@ -1,59 +1,46 @@
-#include "main.h"
-#include <stdio.h>
-
+#include "holberton.h"
 /**
- * main - check the code
- *
- * Return: Always 0.
- */
-int main(void)
+  * infinite_add - adds two numbers
+  * @n1: number1
+  * @n2: number2
+  * @r: result
+  * @size_r: size result
+  * Return: r addition
+**/
+char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-        char *n = "1234567892434574367823574575678477685785645685876876774586734734563456453743756756784458";
-        char *m = "9034790663470697234682914569346259634958693246597324659762347956349265983465962349569346";
-        char r[100];
-        char r2[10];
-        char r3[11];
-        char *res;
+	int i = 0, j = 0, a, b, c, n, aux, dec = 0;
 
-        res = infinite_add(n, m, r, 100);
-        if (res == 0)
-        {
-                printf("Error\n");
-        }
-        else
-        {
-                printf("%s + %s = %s\n", n, m, res);
-        }
-        n = "1234567890";
-        m = "1";
-        res = infinite_add(n, m, r2, 10);
-        if (res == 0)
-        {
-                printf("Error\n");
-        }
-        else
-        {
-                printf("%s + %s = %s\n", n, m, res);
-        }
-        n = "999999999";
-        m = "1";
-        res = infinite_add(n, m, r2, 10);
-        if (res == 0)
-        {
-                printf("Error\n");
-        }
-        else
-        {
-                printf("%s + %s = %s\n", n, m, res);
-        }
-        res = infinite_add(n, m, r3, 11);
-        if (res == 0)
-        {
-                printf("Error\n");
-        }
-        else
-        {
-                printf("%s + %s = %s\n", n, m, res);
-        }
-        return (0);
+	while (n1[i] != '\0')
+	{
+	i++;
+	}
+	while (n2[j] != '\0')
+	{
+	j++;
+	}
+	for (n = 0; n < j || n < i; n++)
+	{
+	a = (i - n) > 0 ? (n1[i - n - 1] - '0') : 0;
+	b = (j - n) > 0 ? (n2[j - n - 1] - '0') : 0;
+	c = a + b + dec;
+	r[n] = (c % 10) + '0';
+	dec = c > 9 ? 1 : 0;
+	}
+	if (dec == 1)
+	{ r[n] = '1';
+	r[n + 1] = '\0'; }
+	else
+	{ r[n] = '\0';
+	n--; }
+	for (i = 0; i < n + 1; i++)
+	{
+	for (j = 0; j < (n - i); j++)
+	{
+	aux = r[j + 1];
+	r[j + 1] = r[j];
+	r[j] = aux;
+	}
+	}
+return (n < size_r - 1 ? r : 0);
 }
